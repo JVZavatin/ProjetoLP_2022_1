@@ -2,17 +2,14 @@
 
 wxIMPLEMENT_APP(cApp);
 
-cApp::cApp()
-{
+cApp::cApp() {
 }
 
-cApp::~cApp()
-{
+cApp::~cApp() {
 }
 
-bool cApp::OnInit()
-{
-	m_frame1 = new cMain();
-	m_frame1->Show();
+bool cApp::OnInit() {
+	frameMenu = new cMain();
+	frameMenu->Show();
 	return true;
 }
