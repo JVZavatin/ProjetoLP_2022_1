@@ -64,6 +64,14 @@ public:
 
         ifstream input_file(filename);
         if (!input_file.is_open()) {
+            montaRankGeral();
+            zeraRankAtual();
+            zeraLevelAtual();
+
+            // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
+            cGameEnd* gameEnd = new cGameEnd();
+            Destroy();
+            gameEnd->Show();
             cerr << "Could not open the file - '" << filename << "'" << endl;
         }
         int aux = 0;
@@ -195,10 +203,9 @@ public:
         zeraLevelAtual();
 
         // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
-        cLevelComplete* levelComplete = new cLevelComplete();
-        levelComplete->numeroFase = filenameNumero;
+        cGameEnd* gameEnd = new cGameEnd();
         Destroy();
-        levelComplete->Show();
+        gameEnd->Show();
         evt.Skip();
     }
     
