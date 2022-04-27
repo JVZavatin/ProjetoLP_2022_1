@@ -7,6 +7,9 @@ using namespace std;
 
 class cLevelComplete : public wxFrame {
 public:
+
+	wxFont font;
+
 	cLevelComplete();
 	~cLevelComplete();
 
