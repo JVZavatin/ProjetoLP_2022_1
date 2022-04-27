@@ -22,6 +22,7 @@ public:
     wxListBox * result_list = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxSize(200, 330), 0, nullptr, wxLB_SINGLE | wxLB_ALWAYS_SB | wxLB_SORT);
     wxTextCtrl* inputC = new wxTextCtrl(this, 10005, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER | wxALIGN_CENTRE_HORIZONTAL);
     wxStaticText* m_timeDisplay = new wxStaticText(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL | wxST_NO_AUTORESIZE | wxBORDER_SIMPLE);
+    wxStaticText* pontos_text = new wxStaticText(this, wxID_ANY, "0", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL | wxST_NO_AUTORESIZE | wxBORDER_SIMPLE);
     //wxStopWatch* tempo = new wxStopWatch();
         // TIMER
     wxTimer* m_timer = new wxTimer;
@@ -74,8 +75,13 @@ public:
                 lines.erase(lines.begin() + i);
 
                 atualizaLista();
+                atualizaPontos();
             }
         }
+    }
+
+    void atualizaPontos() {
+        pontos_text->SetLabel(to_string(pontos));
     }
 
     void atualizaLista() {
