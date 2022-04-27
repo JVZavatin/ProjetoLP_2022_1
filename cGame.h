@@ -16,7 +16,8 @@ public:
         // VARS
     string levelNumber = "level_";
     string filename = "levels/level";
-    string filenameNumero = "1";
+    string filenameFase = "levels/fase.txt";
+    string filenameNumero;
 
     vector<string> lines, linesCrip;
     int numeroDeLetras, pontos = 0;
@@ -32,6 +33,25 @@ public:
     wxDateTime* m_startTime = new wxDateTime;
 
     wxStopWatch sw;
+
+    void readActualLevelFile() {
+        // LE O ARQUIVO DA FASE PARA SELECIONAR
+        string line = "";
+
+        ifstream input_file(filenameFase);
+        if (!input_file.is_open()) {
+            cerr << "Could not open the file - '" << filenameFase << "'" << endl;
+        }
+        while (getline(input_file, line)) {
+            // ENQUANTO TIVER ALGO NO ARQUIVO
+
+            filenameNumero = line;
+
+            line = "";
+        }
+        input_file.close();
+
+    };
 
 
     void readLevelFile() {
@@ -150,7 +170,6 @@ public:
         montaUmRank();
 
         cLevelComplete* levelComplete = new cLevelComplete();
-        levelComplete->numeroFase = filenameNumero;
         Destroy();
         levelComplete->Show();
         evt.Skip();

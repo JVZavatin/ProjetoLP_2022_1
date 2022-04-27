@@ -27,9 +27,11 @@ cLevelComplete::~cLevelComplete() {
 }
 
 void cLevelComplete::NovaFase(wxCommandEvent& evt) {
-	cGame* game = new cGame();
-	game->filenameNumero = cLevelComplete::numeroFase;
+	cGame* newGame = new cGame();
+	char valor = readActualLevelFile();
+	zeraLevelAtual();
+	writeLevelFile(valor);
 	Destroy();
-	game->Show();
+	newGame->Show();
 	evt.Skip();
 }
