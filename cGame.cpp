@@ -4,7 +4,7 @@ wxBEGIN_EVENT_TABLE(cGame, wxFrame)
     EVT_BUTTON(10003, Desistir)
     EVT_BUTTON(10004, Finalizar)
     EVT_TEXT_ENTER(10005, checkInput)
-    EVT_TIMER(wxID_ANY, OnUpdateDisplayedTime)
+    EVT_TIMER(10010, OnUpdateDisplayedTime)
 wxEND_EVENT_TABLE()
 
 cGame::cGame() : wxFrame(nullptr, wxID_ANY, "wxLetroca - Jogando", wxPoint(30, 30), wxSize(800, 600)) {
@@ -50,7 +50,7 @@ cGame::cGame() : wxFrame(nullptr, wxID_ANY, "wxLetroca - Jogando", wxPoint(30, 3
 
         // TEMPORIZADOR NAO FUNCIONA
     wxSizer* sizer_menu_tempo = new wxBoxSizer(wxVERTICAL);
-    wxStaticText* tempo_tittle_text = new wxStaticText(this, wxID_ANY, "Tempo:", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL | wxST_NO_AUTORESIZE | wxBORDER_SIMPLE);
+    wxStaticText* tempo_tittle_text = new wxStaticText(this, 10010, "Tempo:", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE_HORIZONTAL | wxST_NO_AUTORESIZE | wxBORDER_SIMPLE);
     font = tempo_tittle_text->GetFont(); font.MakeBold().MakeLarger(); tempo_tittle_text->SetFont(font);
     sizer_menu_tempo->Add(tempo_tittle_text, 1, wxEXPAND);
     font = m_timeDisplay->GetFont();

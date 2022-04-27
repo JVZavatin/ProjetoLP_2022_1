@@ -4,16 +4,17 @@
 #include <vector>
 #include <string>
 #include "wx/wx.h"
+#include <wx/datetime.h>
 #include "cLevelComplete.h"
 #include "cGameEnd.h"
-#include <wx/datetime.h>
 
 using namespace std;
 
 class cGame : public wxFrame {
 public:
         // VARS
-    string level = "level_1A.txt";
+    string levelNumber = "level_";
+
     vector<string> lines, linesCrip;
     bool gameIsOver = false;
     int numeroDeLetras, pontos = 0;
@@ -33,9 +34,10 @@ public:
 
     void readLevelFile() {
         // LE O ARQUIVO DA FASE E COLOCA EM UM VECTOR DE STRING
-
-        string filename("levels/");
-        filename = filename + level;
+        string filename("levels/level1");
+        srand(time(0));
+        char variation = 'a' + rand() % 3;
+        filename = filename + "/" + levelNumber + variation + ".txt";
 
         string line = "", lineCrip = "*           ";
 
@@ -61,7 +63,7 @@ public:
         }
         numeroDeLetras = lines[0].length();
         input_file.close();
-
+        
     };
 
     void checkInput(wxCommandEvent& evt) {
@@ -153,7 +155,7 @@ public:
     wxButton* btnFinalizar = nullptr;
 
 
-    // DE CLARAÇÃO DOS EVENTOS
+    // DECLARAÇÃO DOS EVENTOS
     wxDECLARE_EVENT_TABLE();
 };
 

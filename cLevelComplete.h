@@ -6,5 +6,9 @@ public:
 	cLevelComplete();
 	~cLevelComplete();
 
+	wxButton* btnNextGame = nullptr;
+
+	void NovaFase(wxCommandEvent& evt);
+
 	wxDECLARE_EVENT_TABLE();
 };
