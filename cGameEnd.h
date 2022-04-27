@@ -6,5 +6,9 @@ public:
 	cGameEnd();
 	~cGameEnd();
 
+	wxButton* btnMenu = nullptr;
+
+	void VoltarMenu(wxCommandEvent& evt);
+
 	wxDECLARE_EVENT_TABLE();
 };

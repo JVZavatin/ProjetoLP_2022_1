@@ -187,7 +187,7 @@ public:
             evt.Skip();
         }
         else {
-            wxMessageBox(wxT("Você precisa acertar pelo menos metade!"));
+            wxMessageBox(wxT("Precisa acertar pelo menos metade!"));
         }
     }
 
