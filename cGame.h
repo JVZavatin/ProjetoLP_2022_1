@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <sstream>
 #include "wx/wx.h"
 #include <wx/datetime.h>
 #include "cLevelComplete.h"
@@ -14,9 +15,9 @@ class cGame : public wxFrame {
 public:
         // VARS
     string levelNumber = "level_";
+    string filename = "levels/level1";
 
     vector<string> lines, linesCrip;
-    bool gameIsOver = false;
     int numeroDeLetras, pontos = 0;
         // WXWIDG
     wxFont font;
@@ -34,7 +35,6 @@ public:
 
     void readLevelFile() {
         // LE O ARQUIVO DA FASE E COLOCA EM UM VECTOR DE STRING
-        string filename("levels/level1");
         srand(time(0));
         char variation = 'a' + rand() % 3;
         filename = filename + "/" + levelNumber + variation + ".txt";
@@ -95,8 +95,59 @@ public:
         }
     }
 
+    void montaUmRank() {
+        // ESCREVE NO ARQUIVO
+        string filenameRankingAtual("ranking/rankingAtual.txt");
+        ofstream input_file(filename);
+        if (!input_file.is_open()) {
+            cerr << "Could not open the file - '" << filenameRankingAtual << "'" << endl;
+        }
+        else {
+            input_file << pontos << "\n";
+        }
+    }
+
+    void zeraRankAtual() {
+        string filenameRankingAtual("ranking/rankingAtual.txt");
+        FILE* f = fopen("ranking/rankingAtual.txt", "w");
+        fclose(f);
+    }
+
+    void montaRankGeral() {
+        // ESCREVE NO ARQUIVO
+        string filenameRankingAtual("ranking/rankingAtual.txt");
+        string filenameRankingGeral("ranking/ranking.txt");
+        string line = "";
+        stringstream ss;
+        int num, total = 0;
+
+        vector<int> ranking;
+
+
+        ifstream input_file(filenameRankingAtual);
+        if (!input_file.is_open()) {
+            cerr << "Could not open the file - '" << filenameRankingAtual << "'" << endl;
+        }
+
+        while (getline(input_file, line)) {
+            ss << line;
+            ss >> num;
+            total += num;
+            ranking.push_back(num);
+        }
+        input_file.close();
+
+        ofstream output_file(filenameRankingGeral);
+        output_file << "Pontos: " << total << " na Fase: " << filename << "\n";
+        output_file.close();
+    }
+
+
     void Finalizar(wxCommandEvent& evt) {
         // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
+
+        montaUmRank();
+
         cLevelComplete* levelComplete = new cLevelComplete();
         Destroy();
         levelComplete->Show();
@@ -104,6 +155,10 @@ public:
     }
 
     void Desistir(wxCommandEvent& evt) {
+
+        montaRankGeral();
+        zeraRankAtual();
+
         // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
         cGameEnd* gameEnd = new cGameEnd();
         Destroy();
