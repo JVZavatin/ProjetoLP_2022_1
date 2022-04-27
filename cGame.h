@@ -18,6 +18,7 @@ public:
     string filename = "levels/level";
     string filenameFase = "levels/fase.txt";
     string filenameNumero = "1";
+    int countLinhas = 0, countAcertos = 0;
 
     vector<string> lines, linesCrip;
     int numeroDeLetras, pontos = 0;
@@ -76,6 +77,7 @@ public:
         }
         int aux = 0;
         while (getline(input_file, line)) {
+            countLinhas++;
             // ENQUANTO TIVER ALGO NO ARQUIVO, PUSHBACK()
 
             lines.push_back(line);
@@ -107,6 +109,7 @@ public:
 
                 atualizaLista();
                 atualizaPontos();
+                countAcertos++;
             }
         }
     }
@@ -175,12 +178,17 @@ public:
     void Finalizar(wxCommandEvent& evt) {
         // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
 
-        montaUmRank();
+        if (countAcertos >= countLinhas / 2) {
+            montaUmRank();
 
-        cLevelComplete* levelComplete = new cLevelComplete();
-        Destroy();
-        levelComplete->Show();
-        evt.Skip();
+            cLevelComplete* levelComplete = new cLevelComplete();
+            Destroy();
+            levelComplete->Show();
+            evt.Skip();
+        }
+        else {
+            wxMessageBox(wxT("Você precisa acertar pelo menos metade!"));
+        }
     }
 
     void zeraLevelAtual() {
