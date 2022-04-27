@@ -12,9 +12,9 @@ cLevelComplete::cLevelComplete() : wxFrame(nullptr, wxID_ANY, "wxLetroca - Fase 
 cLevelComplete::~cLevelComplete() {
 }
 
-
 void cLevelComplete::NovaFase(wxCommandEvent& evt) {
 	cGame* game = new cGame();
+	game->filenameNumero = cLevelComplete::numeroFase;
 	Destroy();
 	game->Show();
 	evt.Skip();

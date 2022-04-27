@@ -14,6 +14,8 @@ class cGame : public wxFrame {
 public:
         // VARS
     string levelNumber = "level_";
+    string filename = "levels/level";
+    string filenameNumero = "1";
 
     vector<string> lines, linesCrip;
     bool gameIsOver = false;
@@ -34,10 +36,9 @@ public:
 
     void readLevelFile() {
         // LE O ARQUIVO DA FASE E COLOCA EM UM VECTOR DE STRING
-        string filename("levels/level1");
         srand(time(0));
         char variation = 'a' + rand() % 3;
-        filename = filename + "/" + levelNumber + variation + ".txt";
+        filename = filename + filenameNumero + "/" + levelNumber + variation + ".txt";
 
         string line = "", lineCrip = "*           ";
 
@@ -98,6 +99,7 @@ public:
     void Finalizar(wxCommandEvent& evt) {
         // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
         cLevelComplete* levelComplete = new cLevelComplete();
+        levelComplete->numeroFase = filenameNumero;
         Destroy();
         levelComplete->Show();
         evt.Skip();
