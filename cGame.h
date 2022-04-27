@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include "wx/wx.h"
+#include "cLevelComplete.h"
+#include "cGameEnd.h"
 #include <wx/datetime.h>
 
 using namespace std;
@@ -87,16 +89,18 @@ public:
 
     void Finalizar(wxCommandEvent& evt) {
         // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
-        cGame* game = new cGame();
+        cLevelComplete* levelComplete = new cLevelComplete();
         Destroy();
-        game->Show();
+        levelComplete->Show();
         evt.Skip();
     }
 
     void Desistir(wxCommandEvent& evt) {
         // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
+        cGameEnd* gameEnd = new cGameEnd();
         Destroy();
-
+        gameEnd->Show();
+        evt.Skip();
     }
     
 

@@ -27,6 +27,12 @@
     <ClInclude Include="cRanking.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cLevelComplete.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cGameEnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cMain.cpp">
@@ -39,6 +45,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cRanking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cLevelComplete.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cGameEnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
