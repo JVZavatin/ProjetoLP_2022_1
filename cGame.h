@@ -20,7 +20,7 @@ public:
     string filenameNumero = "1";
     int countLinhas = 0, countAcertos = 0;
 
-    vector<string> lines, linesCrip;
+    vector<string> lines, ranks, linesCrip;
     int numeroDeLetras, pontos = 0;
         // WXWIDG
     wxFont font;
@@ -32,8 +32,6 @@ public:
         // TIMER
     wxTimer* m_timer = new wxTimer;
     wxDateTime* m_startTime = new wxDateTime;
-
-    wxStopWatch sw;
 
     void readActualLevelFile() {
         // LE O ARQUIVO DA FASE PARA SELECIONAR
@@ -69,7 +67,7 @@ public:
             zeraRankAtual();
             zeraLevelAtual();
 
-            // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
+            // ï¿½ PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
             cGameEnd* gameEnd = new cGameEnd();
             Destroy();
             gameEnd->Show();
@@ -127,16 +125,40 @@ public:
         }
     }
 
-    void montaUmRank() {
+    void readRankingFile() {
+        // LE O ARQUIVO DO RANK E COLOCA EM UM VECTOR DE STRING
+        string filenameRA = "ranking/ranking.txt";
+        string rank;
+
+        ifstream input_file(filenameRA);
+        if (!input_file.is_open()) {
+            cerr << "Could not open the file - '" << filenameRA << "'" << endl;
+        }
+        while (getline(input_file, rank)) {
+            // ENQUANTO TIVER ALGO NO ARQUIVO, PUSHBACK()
+
+            ranks.push_back(rank);
+            rank = "";
+        }
+        numeroDeLetras = ranks[0].length();
+        input_file.close();
+
+    };
+
+    void montaRankAtual() {
         // ESCREVE NO ARQUIVO
         string filenameRankingAtual("ranking/rankingAtual.txt");
-        ofstream input_file(filenameRankingAtual);
-        if (!input_file.is_open()) {
+        ofstream output_file;
+        output_file.open(filenameRankingAtual, ios_base::app);
+        if (!output_file.is_open()) {
             cerr << "Could not open the file - '" << filenameRankingAtual << "'" << endl;
         }
         else {
-            input_file << pontos << "\n";
+            for (int i = 0; i < ranks.size(); i++)
+                output_file << ranks[i] << "\n";
+            output_file << pontos << "\n";
         }
+        output_file.close();
     }
 
     void zeraRankAtual() {
@@ -151,9 +173,8 @@ public:
         string filenameRankingGeral("ranking/ranking.txt");
         string line = "";
         stringstream ss;
-        int num, total = 0;
+        int total = 0;
 
-        vector<int> ranking;
 
 
         ifstream input_file(filenameRankingAtual);
@@ -162,24 +183,22 @@ public:
         }
 
         while (getline(input_file, line)) {
-            ss << line;
-            ss >> num;
-            total += num;
-            ranking.push_back(num);
+            total += stoi(line);
         }
         input_file.close();
 
-        ofstream output_file(filenameRankingGeral);
+        ofstream output_file;
+        output_file.open(filenameRankingGeral, ios_base::app);
         output_file << "Pontos: " << total << " na Fase: " << filename << "\n";
         output_file.close();
     }
 
 
     void Finalizar(wxCommandEvent& evt) {
-        // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
+        // ï¿½ PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
 
         if (countAcertos >= countLinhas / 2) {
-            montaUmRank();
+            montaRankAtual();
 
             cLevelComplete* levelComplete = new cLevelComplete();
             Destroy();
@@ -187,7 +206,7 @@ public:
             evt.Skip();
         }
         else {
-            wxMessageBox(wxT("Você precisa acertar pelo menos metade!"));
+            wxMessageBox(wxT("Vocï¿½ precisa acertar pelo menos metade!"));
         }
     }
 
@@ -210,7 +229,7 @@ public:
         zeraRankAtual();
         zeraLevelAtual();
 
-        // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
+        // ï¿½ PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
         cGameEnd* gameEnd = new cGameEnd();
         Destroy();
         gameEnd->Show();
@@ -261,7 +280,7 @@ public:
     wxButton* btnFinalizar = nullptr;
 
 
-    // DECLARAÇÃO DOS EVENTOS
+    // DECLARAï¿½ï¿½O DOS EVENTOS
     wxDECLARE_EVENT_TABLE();
 };
 
