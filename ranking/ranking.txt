@@ -1,1 +1,1 @@
-Pontos: 0 na Fase: levels/level1/level_a.txt
+Pontos: 4 na Fase: levels/level2/level_a.txt

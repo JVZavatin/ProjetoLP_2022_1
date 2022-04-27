@@ -17,7 +17,7 @@ public:
     string levelNumber = "level_";
     string filename = "levels/level";
     string filenameFase = "levels/fase.txt";
-    string filenameNumero;
+    string filenameNumero = "1";
 
     vector<string> lines, linesCrip;
     int numeroDeLetras, pontos = 0;
@@ -119,7 +119,7 @@ public:
     void montaUmRank() {
         // ESCREVE NO ARQUIVO
         string filenameRankingAtual("ranking/rankingAtual.txt");
-        ofstream input_file(filename);
+        ofstream input_file(filenameRankingAtual);
         if (!input_file.is_open()) {
             cerr << "Could not open the file - '" << filenameRankingAtual << "'" << endl;
         }
@@ -175,10 +175,24 @@ public:
         evt.Skip();
     }
 
+    void zeraLevelAtual() {
+        FILE* f = fopen("levels/fase.txt", "w");
+        fclose(f);
+
+        // ESCREVE NO ARQUIVO
+        string filename = "levels/fase.txt";
+        ofstream input_file(filename);
+        if (!input_file.is_open()) {
+            cerr << "Could not open the file - '" << filename << "'" << endl;
+        }
+        input_file << "1" << "\n";
+    }
+
     void Desistir(wxCommandEvent& evt) {
 
         montaRankGeral();
         zeraRankAtual();
+        zeraLevelAtual();
 
         // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
         cLevelComplete* levelComplete = new cLevelComplete();

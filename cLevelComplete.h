@@ -60,6 +60,7 @@ public:
         else {
             input_file << valor;
         }
+        input_file.close();
     }
 
 	void NovaFase(wxCommandEvent& evt);
