@@ -11,6 +11,7 @@ cGame::cGame() : wxFrame(nullptr, wxID_ANY, "wxLetroca - Jogando", wxPoint(30, 3
 
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
+    readActualLevelFile();
     readLevelFile();
 
     // LISTA DE PALAVRAS NA FASE
