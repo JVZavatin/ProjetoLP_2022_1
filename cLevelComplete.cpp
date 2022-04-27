@@ -20,6 +20,11 @@ cLevelComplete::cLevelComplete() : wxFrame(nullptr, wxID_ANY, "wxLetroca - Fase 
 	sizer_btnNextGame->Add(btnNextGame, 1, wxEXPAND);
 	sizer->Add(sizer_btnNextGame, 1, wxEXPAND | wxALL, 30);
 
+	wxSizer* sizer_btnRanking = new wxBoxSizer(wxVERTICAL);
+	btnRanking = new wxButton(this, 10002, "Ranking Geral", wxPoint(10, 10), wxSize(150, 50));
+	sizer_btnRanking->Add(btnRanking, 1, wxEXPAND);
+	sizer->Add(sizer_btnRanking, 1, wxEXPAND | wxALL, 30);
+
 	this->SetSizerAndFit(sizer);
 }
 

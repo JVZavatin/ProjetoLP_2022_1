@@ -162,9 +162,10 @@ public:
         zeraRankAtual();
 
         // É PRA FINALIZAR O JOGO E MOSTRAR OUTRA TELA
-        cGameEnd* gameEnd = new cGameEnd();
+        cLevelComplete* levelComplete = new cLevelComplete();
+        levelComplete->numeroFase = filenameNumero;
         Destroy();
-        gameEnd->Show();
+        levelComplete->Show();
         evt.Skip();
     }
     

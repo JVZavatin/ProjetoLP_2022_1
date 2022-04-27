@@ -7,14 +7,17 @@ using namespace std;
 
 class cLevelComplete : public wxFrame {
 public:
+	string numeroFase = "";
 
 	wxFont font;
 
 	cLevelComplete();
 	~cLevelComplete();
 
-	string numeroFase = "";
 	wxButton* btnNextGame = nullptr;
+	wxButton* btnRanking = nullptr;
+
+
 
 	void NovaFase(wxCommandEvent& evt);
 
